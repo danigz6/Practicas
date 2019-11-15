@@ -64,6 +64,5 @@ bool esSim (int m[][KTAM]{
         }
         i++;
     }
-
     return test;
 }

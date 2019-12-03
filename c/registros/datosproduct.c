@@ -19,7 +19,7 @@ typedef TProducto TAlmacen[Max];
 
 char menu();
 void alta(Talmacen, int);
-void baja(TAlmacen, int);
+void baja(TAlmacen, int &);
 float calcVal(TAlmacen, int);
 
 int main(){
@@ -34,7 +34,6 @@ int main(){
                       numProd++;
                       break;
             case '2': baja(prods, numProd);
-                      numProd--;
                       break;
             case '3': cout << "El valor es :" << calVal(prods,numProd);
                       break;
@@ -47,6 +46,7 @@ int main(){
 char menu(){
     char op;
 
+    cout << endl;
     do{
         cout <<"1. Dar de alta" << endl;
         cout <<"2. Dar de baja" << endl;
@@ -58,4 +58,48 @@ char menu(){
     }while();
 
     return ;
+}
+//Añadir productos al vector 
+void alta(Talmacen prods, int &num){
+
+    cout << "Código: ";
+    cin >> prods[num].cod;
+
+    cout << "Nombre: ";
+    cin >> prods[num].nombre;
+
+    cout << "Precio: ";
+    cin >> prods[num].precio;
+
+    cout << "Unidades: ";
+    cin >> prods[num].unidades;
+}
+
+void baja(TAlmacen prods, int num){
+    int codigo=0, i=0;
+
+    cout << "Código a dar de baja: ";
+    cin >> codigo;
+
+    while (i<num && codigo!=prods[i].cod){
+        i++;
+        if (i==num){ //El producto no existe
+         cout << "Error: el producto no existe";
+        }else{
+            for (j=i; j<num-1; j++){ //Desplazamos los productos 
+                prods[j]=prods[j+1]
+            }
+            num--; // Decrementamos el contador de productos
+        }
+    }
+}
+
+float calcVal(TAlmacen prods, int num){
+    int i=0;
+    float summaPrecios=0.0;
+
+    for (i=0; i<num; i++){
+        summaPrecios=summaPrecios+prods[i].precio*prods[i].unid;
+    }
+    return summaPrecios;
 }
